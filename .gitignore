@@ -1,0 +1,8 @@
+.netrwhist
+vimsession.vim
+*~
+backup/*
+bundles/*
+swap/*
+!.gitkeep
+
