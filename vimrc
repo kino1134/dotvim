@@ -62,7 +62,6 @@ syntax enable
 "endif
 "End dein Scripts-------------------------
 
-" カラーテーマ
 " airline
 " git clone https://github.com/Lokaltog/vim-powerline.git
 " fontforge -lang=py -script fontpatcher/fontpatcher ~/Library/Fonts/Ricty*.ttf
@@ -79,6 +78,7 @@ let g:airline_symbols.branch = '⭠'
 let g:airline_symbols.readonly = '⭤'
 let g:airline_symbols.linenr = '⭡'
 
+" カラーテーマ
 colorscheme onedark
 let g:airline_theme='onedark'
 " colorscheme molokai
