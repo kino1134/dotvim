@@ -15,6 +15,7 @@ set listchars=tab:>_,eol:↲,extends:»,precedes:«
 " 一時ファイルのディレクトリをまとめる
 set directory=~/.vim/swap
 set backupdir=~/.vim/backup
+set undodir=~/.vim/undo
 
 " インデントの各種デフォルト設定
 set autoindent       " 改行前に前行のインデントを計測
@@ -55,6 +56,7 @@ if dein#load_state('/Users/inoue/.vim/bundles')
   call dein#add('jacoborus/tender.vim')
   call dein#add('vim-airline/vim-airline')
   call dein#add('scrooloose/nerdtree')
+  call dein#add('tpope/vim-fugitive')
   """ 追加ここまで
 
   " Required:

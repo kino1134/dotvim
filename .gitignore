@@ -4,5 +4,6 @@ vimsession.vim
 backup/*
 bundles/*
 swap/*
+undo/*
 !.gitkeep
 
