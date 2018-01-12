@@ -27,6 +27,18 @@ set tabstop=2        " タブを含むファイルを開いた際、何文字の
 set shiftwidth=2     " 自動インデントで入る空白数
 set softtabstop=2    " キーボードからはいるタブ数
 
+" 矩形選択時、行末以降にも移動できるようにする
+set virtualedit+=block
+
+" インサートモード時のカーソル移動を追加
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-k> <Up>
+inoremap <C-m> <Down>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Del>
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -54,6 +66,7 @@ if dein#load_state('/Users/inoue/.vim/bundles')
   call dein#add('joshdick/onedark.vim')
   call dein#add('tomasr/molokai')
   call dein#add('jacoborus/tender.vim')
+
   call dein#add('vim-airline/vim-airline')
   call dein#add('scrooloose/nerdtree')
   call dein#add('tpope/vim-fugitive')
@@ -140,3 +153,17 @@ augroup remove_trailing_whitespace
   autocmd!
   autocmd BufWritePre * :%s/\s\+$//ge
 augroup END
+
+" 一時的なウィンドウ最大/最小化を行う
+function! s:myToggleWindowMaximize()
+  if exists('g:myWindowResetCmd')
+    execute g:myWindowResetCmd
+    unlet! g:myWindowResetCmd
+  else
+    let g:myWindowResetCmd = winrestcmd()
+    execute "normal! \<C-w>_\<C-w>|"
+  endif
+endfunction
+command! MyToggleWindowSize :call s:myToggleWindowMaximize()
+noremap <C-w>m :MyToggleWindowSize<CR>
+noremap <C-w><C-m> :MyToggleWindowSize<CR>
