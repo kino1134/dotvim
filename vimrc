@@ -16,6 +16,16 @@ set listchars=tab:>_,eol:↲,extends:»,precedes:«
 set directory=~/.vim/swap
 set backupdir=~/.vim/backup
 
+" インデントの各種デフォルト設定
+set autoindent       " 改行前に前行のインデントを計測
+set smartindent      " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+"set cindent          " Cプログラムファイルの自動インデントを始める
+set smarttab         " 新しい行を作った時に高度な自動インデントを行う
+set expandtab        " タブ入力を複数の空白に置き換える
+set tabstop=2        " タブを含むファイルを開いた際、何文字の空白に変換するか
+set shiftwidth=2     " 自動インデントで入る空白数
+set softtabstop=2    " キーボードからはいるタブ数
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -46,7 +56,7 @@ if dein#load_state('/Users/inoue/.vim/bundles')
   call dein#add('vim-airline/vim-airline')
   call dein#add('scrooloose/nerdtree')
   """ 追加ここまで
-  
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -91,19 +101,40 @@ if has('gui_macvim')
   let g:no_gvimrc_example=1
 endif
 
+function! s:GetBufByte()
+    let byte = line2byte(line('$') + 1)
+    if byte == -1
+        return 0
+    else
+        return byte - 1
+    endif
+endfunction
+if !exists('g:my_restore_session')
+  " 引数がない、かつ初期バッファが空である
+  if @% == '' && s:GetBufByte() == 0
+    let g:my_restore_session = 1
+  else
+    let g:my_restore_session = 0
+  endif
+endif
+
 " セッションの保存
 set sessionoptions+=resize
 augroup save_session
   autocmd!
-  autocmd VimLeavePre * NERDTreeClose 
-  autocmd VimLeave * mks! ~/.vim/vimsession.vim
+  autocmd VimLeavePre * NERDTreeClose
+  autocmd VimLeave * if g:my_restore_session | mks! ~/.vim/vimsession.vim | endif
 augroup END
 
 " セッションの復元
 augroup load_session
   autocmd!
-  autocmd VimEnter * source ~/.vim/vimsession.vim 
-  autocmd VimEnter * NERDTree 
-  autocmd VimEnter * AirlineRefresh
+  autocmd VimEnter * nested if g:my_restore_session | source ~/.vim/vimsession.vim | endif
+  autocmd VimEnter * NERDTree
 augroup END
 
+" 行末の空白文字の自動削除
+augroup remove_trailing_whitespace
+  autocmd!
+  autocmd BufWritePre * :%s/\s\+$//ge
+augroup END
