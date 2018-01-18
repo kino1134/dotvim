@@ -27,17 +27,23 @@ set tabstop=2        " タブを含むファイルを開いた際、何文字の
 set shiftwidth=2     " 自動インデントで入る空白数
 set softtabstop=2    " キーボードからはいるタブ数
 
+" ハイライトを消すキーバインドを追加する
+nmap <Esc><Esc> :nohl<CR>
+
 " 矩形選択時、行末以降にも移動できるようにする
 set virtualedit+=block
 
 " インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
-inoremap <C-k> <Up>
-inoremap <C-m> <Down>
+inoremap <C-l> <Up>
+inoremap <C-k> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-d> <Del>
+
+" ノーマルモード時、空行を挿入するだけのキーを追加
+nnoremap <C-j> o<ESC>
 
 "dein Scripts-----------------------------
 if &compatible
@@ -70,6 +76,8 @@ if dein#load_state('/Users/inoue/.vim/bundles')
   call dein#add('vim-airline/vim-airline')
   call dein#add('scrooloose/nerdtree')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
   """ 追加ここまで
 
   " Required:
@@ -124,17 +132,20 @@ function! s:GetBufByte()
         return byte - 1
     endif
 endfunction
-if !exists('g:my_restore_session')
-  " 引数がない、かつ初期バッファが空である
-  if @% == '' && s:GetBufByte() == 0
-    let g:my_restore_session = 1
-  else
-    let g:my_restore_session = 0
+function! s:initRestoreSession()
+  if !exists('g:my_restore_session')
+    " 引数がない、かつ初期バッファが空である
+    if @% == '' && s:GetBufByte() == 0
+      let g:my_restore_session = 1
+    else
+      let g:my_restore_session = 0
+    endif
   endif
-endif
+  return g:my_restore_session
+endfunction
 
 " セッションの保存
-set sessionoptions+=resize
+set sessionoptions+=resize sessionoptions+=localoptions
 augroup save_session
   autocmd!
   autocmd VimLeavePre * NERDTreeClose
@@ -144,7 +155,7 @@ augroup END
 " セッションの復元
 augroup load_session
   autocmd!
-  autocmd VimEnter * nested if g:my_restore_session | source ~/.vim/vimsession.vim | endif
+  autocmd VimEnter * nested if s:initRestoreSession() | source ~/.vim/vimsession.vim | endif
   autocmd VimEnter * NERDTree
 augroup END
 
@@ -167,3 +178,20 @@ endfunction
 command! MyToggleWindowSize :call s:myToggleWindowMaximize()
 noremap <C-w>m :MyToggleWindowSize<CR>
 noremap <C-w><C-m> :MyToggleWindowSize<CR>
+
+" QuickRunの各種設定
+nnoremap <C-_> :QuickRun<CR>
+let g:quickrun_config = get(g:, 'quickrun_config', {})
+let g:quickrun_config._ = {
+  \ 'runner' : 'vimproc',
+  \ 'runner/vimproc/updatetime': 60,
+  \ }
+" let g:quickrun_config._ = {
+"       \ 'runner'    : 'system',
+"       \ 'runner/vimproc/updatetime' : 60,
+"       \ 'outputter' : 'error',
+"       \ 'outputter/error/success' : 'buffer',
+"       \ 'outputter/error/error'   : 'quickfix',
+"       \ 'outputter/buffer/split'  : ':rightbelow 8sp',
+"       \ 'outputter/buffer/close_on_empty' : 1,
+"       \ }
