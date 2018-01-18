@@ -33,6 +33,9 @@ nmap <Esc><Esc> :nohl<CR>
 " 矩形選択時、行末以降にも移動できるようにする
 set virtualedit+=block
 
+" クリップボードへのコピーを行えるようにする
+set clipboard+=unnamed
+
 " インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
