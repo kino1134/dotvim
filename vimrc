@@ -147,20 +147,23 @@ function! s:initRestoreSession()
   return g:my_restore_session
 endfunction
 
-" セッションの保存
-set sessionoptions+=resize sessionoptions+=localoptions
-augroup save_session
-  autocmd!
-  autocmd VimLeavePre * NERDTreeClose
-  autocmd VimLeave * if g:my_restore_session | mks! ~/.vim/vimsession.vim | endif
-augroup END
+if has('gui_macvim')
+  let s:sessionFilePath = $HOME . '/.vim/vimsession.vim'
+  " セッションの保存
+  set sessionoptions+=resize sessionoptions+=localoptions
+  augroup save_session
+    autocmd!
+    autocmd VimLeavePre * NERDTreeClose
+    autocmd VimLeave * if g:my_restore_session | execute 'mks! ' . s:sessionFilePath | endif
+  augroup END
 
-" セッションの復元
-augroup load_session
-  autocmd!
-  autocmd VimEnter * nested if s:initRestoreSession() | source ~/.vim/vimsession.vim | endif
-  autocmd VimEnter * NERDTree
-augroup END
+  " セッションの復元
+  augroup load_session
+    autocmd!
+    autocmd VimEnter * nested if s:initRestoreSession() && filereadable(s:sessionFilePath) | execute 'source ' . s:sessionFilePath | endif
+    autocmd VimEnter * NERDTree
+  augroup END
+endif
 
 " 行末の空白文字の自動削除
 augroup remove_trailing_whitespace
