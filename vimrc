@@ -1,6 +1,10 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+if has('win32') || has('win64')
+  let g:vimproc#download_windows_dll = 1
+endif
+
 """ MacVimのデフォルト設定を明記する
 " 検索時に大文字小文字を無視 (noignorecase:無視しない)
 set ignorecase
@@ -156,13 +160,15 @@ syntax enable
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+if has('gui_macvim')
+  let g:airline_left_sep = '⮀'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_right_sep = '⮂'
+  let g:airline_right_alt_sep = '⮃'
+  let g:airline_symbols.branch = '⭠'
+  let g:airline_symbols.readonly = '⭤'
+  let g:airline_symbols.linenr = '⭡'
+endif
 
 " カラーテーマ
 colorscheme onedark
@@ -172,7 +178,7 @@ let g:airline_theme='onedark'
 " colorscheme tender
 
 " 余計な情報を読まないようにする
-if has('gui_macvim')
+if has('gui_macvim') || has('win32') || has('win64')
   let g:macvim_skip_colorscheme=1
   let g:no_gvimrc_example=1
 endif
