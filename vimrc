@@ -62,7 +62,7 @@ set list
 set listchars=tab:>_,eol:↲,extends:»,precedes:«
 
 " 一時ファイルのディレクトリをまとめる
-let s:baseDir = expand('<sfile>:h')
+let s:baseDir = expand('<sfile>:p:h')
 execute 'set directory=' . s:baseDir . '/swap'
 execute 'set backupdir=' . s:baseDir . '/backup'
 execute 'set undodir=' . s:baseDir . '/undo'
