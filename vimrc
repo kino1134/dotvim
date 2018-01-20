@@ -295,3 +295,14 @@ let g:quickrun_config._ = {
 "       \ 'outputter/buffer/split'  : ':rightbelow 8sp',
 "       \ 'outputter/buffer/close_on_empty' : 1,
 "       \ }
+
+" easymotion
+let g:EasyMotion_smartcase = 1
+map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
+map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
+map <Space> <Plug>(easymotion-s2)
+nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
+nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
+
