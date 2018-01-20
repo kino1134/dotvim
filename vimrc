@@ -1,3 +1,10 @@
+set encoding=utf-8
+scriptencoding utf-8
+
+if has('win32') || has('win64')
+  let g:vimproc#download_windows_dll = 1
+endif
+
 """ MacVimのデフォルト設定を明記する
 " 検索時に大文字小文字を無視 (noignorecase:無視しない)
 set ignorecase
@@ -59,9 +66,10 @@ set list
 set listchars=tab:>_,eol:↲,extends:»,precedes:«
 
 " 一時ファイルのディレクトリをまとめる
-set directory=~/.vim/swap
-set backupdir=~/.vim/backup
-set undodir=~/.vim/undo
+let s:baseDir = expand('<sfile>:p:h')
+execute 'set directory=' . s:baseDir . '/swap'
+execute 'set backupdir=' . s:baseDir . '/backup'
+execute 'set undodir=' . s:baseDir . '/undo'
 
 " インデントの各種デフォルト設定
 set autoindent       " 改行前に前行のインデントを計測
@@ -100,15 +108,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/inoue/.vim/bundles/repos/github.com/Shougo/dein.vim
+execute 'set runtimepath+=' . s:baseDir . '/bundles/repos/github.com/Shougo/dein.vim'
 
 " Required:
-if dein#load_state('/Users/inoue/.vim/bundles')
-  call dein#begin('/Users/inoue/.vim/bundles')
+if dein#load_state(s:baseDir . '/bundles')
+  call dein#begin(s:baseDir . '/bundles')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/inoue/.vim/bundles/repos/github.com/Shougo/dein.vim')
+  call dein#add(s:baseDir . '/bundles/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
@@ -152,13 +160,15 @@ syntax enable
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+if has('gui_macvim')
+  let g:airline_left_sep = '⮀'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_right_sep = '⮂'
+  let g:airline_right_alt_sep = '⮃'
+  let g:airline_symbols.branch = '⭠'
+  let g:airline_symbols.readonly = '⭤'
+  let g:airline_symbols.linenr = '⭡'
+endif
 
 " カラーテーマ
 colorscheme onedark
@@ -168,7 +178,7 @@ let g:airline_theme='onedark'
 " colorscheme tender
 
 " 余計な情報を読まないようにする
-if has('gui_macvim')
+if has('gui_macvim') || has('win32') || has('win64')
   let g:macvim_skip_colorscheme=1
   let g:no_gvimrc_example=1
 endif
@@ -193,8 +203,8 @@ function! s:initRestoreSession()
   return g:my_restore_session
 endfunction
 
-if has('gui_macvim')
-  let s:sessionFilePath = $HOME . '/.vim/vimsession.vim'
+if has('gui_macvim') || has('win32') || has('win64')
+  let s:sessionFilePath = s:baseDir . '/vimsession.vim'
   " セッションの保存
   set sessionoptions+=resize sessionoptions+=localoptions
   augroup save_session
