@@ -132,6 +132,7 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('chriskempson/vim-tomorrow-theme')           " Colorscheme
 
   call dein#add('vim-airline/vim-airline')                   " Statusbar
+  " call dein#add('itchyny/lightline.vim')                     " Statusbar
   call dein#add('scrooloose/nerdtree')                       " File Explorer
   call dein#add('tpope/vim-fugitive')                        " Git Plugin
   call dein#add('thinca/vim-quickrun')                       " Run Command Interface
@@ -170,6 +171,30 @@ colorscheme Tomorrow-Night-Eighties
 " highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 " highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ 'component': {
+      \   'lineinfo': '⭡ %3l:%-2v',
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'LightlineReadonly',
+      \   'fugitive': 'LightlineFugitive'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+function! LightlineReadonly()
+  return &readonly ? '⭤' : ''
+endfunction
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? '⭠ '.branch : ''
+  endif
+  return ''
+endfunction
 
 " airline
 " git clone https://github.com/Lokaltog/vim-powerline.git
