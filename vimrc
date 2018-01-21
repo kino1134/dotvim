@@ -196,15 +196,17 @@ function! LightlineFugitive()
 endfunction
 
 " airline
+let g:airline_theme='onedark'
+" powerlineを使う上で、以下のようなフォント合成が必要になる
+" 最新のものだと、ambiwidth=doubleで余白が空いてしまう
 " git clone https://github.com/Lokaltog/vim-powerline.git
 " fontforge -lang=py -script fontpatcher/fontpatcher ~/Library/Fonts/Ricty*.ttf
 " fontforge -lang=py -script fontpatcher/fontpatcher /System/Library/Fonts/Menlo.ttc
 "let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
 if has('gui_macvim')
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
   let g:airline_left_sep = '⮀'
   let g:airline_left_alt_sep = '⮁'
   let g:airline_right_sep = '⮂'
