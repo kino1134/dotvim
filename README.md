@@ -3,7 +3,7 @@
 ```
 git clone https://github.com/Shougo/dein.vim "$HOME/vimfiles/bundles/repos/github.com/Shougo/dein.vim"
 ```
-1. vimを立ち上げて、以下コマンドを実行
+2. vimを立ち上げて、以下コマンドを実行
 ```
 :call dein#install()
 ```
