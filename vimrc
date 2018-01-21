@@ -126,15 +126,23 @@ if dein#load_state(s:baseDir . '/bundles')
   " call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
 
   """ 追加
-  call dein#add('joshdick/onedark.vim')
-  call dein#add('tomasr/molokai')
-  call dein#add('jacoborus/tender.vim')
+  call dein#add('joshdick/onedark.vim')                      " Colorscheme
+  call dein#add('tomasr/molokai')                            " Colorscheme
+  call dein#add('jacoborus/tender.vim')                      " Colorscheme
+  call dein#add('chriskempson/vim-tomorrow-theme')           " Colorscheme
 
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('thinca/vim-quickrun')
-  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+  call dein#add('vim-airline/vim-airline')                   " Statusbar
+  " call dein#add('itchyny/lightline.vim')                     " Statusbar
+  call dein#add('scrooloose/nerdtree')                       " File Explorer
+  call dein#add('tpope/vim-fugitive')                        " Git Plugin
+  call dein#add('thinca/vim-quickrun')                       " Run Command Interface
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
+  call dein#add('easymotion/vim-easymotion')                 " Search easily
+  call dein#add('tpope/vim-commentary')                      " Toggle Comment
+  call dein#add('tpope/vim-surround')                        " Text Object for Pairs
+  call dein#add('cohama/lexima.vim')                         " Auto Close Pair
+  call dein#add('scrooloose/syntastic')                      " Syntax Check
+  call dein#add('mbbill/undotree')                           " Undo Tree
   """ 追加ここまで
 
   " Required:
@@ -152,11 +160,47 @@ syntax enable
 "endif
 "End dein Scripts-------------------------
 
+" カラーテーマ
+" colorscheme onedark
+colorscheme Tomorrow-Night-Eighties
+" colorscheme molokai
+" colorscheme tender
+
+" アンダーラインを引く(color terminal)
+" highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" アンダーラインを引く(gui)
+" highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ 'component': {
+      \   'lineinfo': '⭡ %3l:%-2v',
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'LightlineReadonly',
+      \   'fugitive': 'LightlineFugitive'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
+function! LightlineReadonly()
+  return &readonly ? '⭤' : ''
+endfunction
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? '⭠ '.branch : ''
+  endif
+  return ''
+endfunction
+
 " airline
 " git clone https://github.com/Lokaltog/vim-powerline.git
 " fontforge -lang=py -script fontpatcher/fontpatcher ~/Library/Fonts/Ricty*.ttf
 " fontforge -lang=py -script fontpatcher/fontpatcher /System/Library/Fonts/Menlo.ttc
 "let g:airline_powerline_fonts = 1
+let g:airline_theme='onedark'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -169,13 +213,6 @@ if has('gui_macvim')
   let g:airline_symbols.readonly = '⭤'
   let g:airline_symbols.linenr = '⭡'
 endif
-
-" カラーテーマ
-colorscheme onedark
-let g:airline_theme='onedark'
-" colorscheme molokai
-" let macvim_skip_colorscheme=1
-" colorscheme tender
 
 " 余計な情報を読まないようにする
 if has('gui_macvim') || has('win32') || has('win64')
@@ -257,3 +294,14 @@ let g:quickrun_config._ = {
 "       \ 'outputter/buffer/split'  : ':rightbelow 8sp',
 "       \ 'outputter/buffer/close_on_empty' : 1,
 "       \ }
+
+" easymotion
+let g:EasyMotion_smartcase = 1
+map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
+map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
+map <Space> <Plug>(easymotion-s2)
+nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
+nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
+
