@@ -137,10 +137,9 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('tpope/vim-fugitive')                        " Git Plugin
   call dein#add('thinca/vim-quickrun')                       " Run Command Interface
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
-  " =====================================================================================
-  call dein#add('tpope/vim-surround')                        " Text Object for Pairs
   call dein#add('easymotion/vim-easymotion')                 " Search easily
   call dein#add('tpope/vim-commentary')                      " Toggle Comment
+  call dein#add('tpope/vim-surround')                        " Text Object for Pairs
   call dein#add('cohama/lexima.vim')                         " Auto Close Pair
   call dein#add('scrooloose/syntastic')                      " Syntax Check
   call dein#add('mbbill/undotree')                           " Undo Tree
