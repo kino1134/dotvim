@@ -291,6 +291,7 @@ noremap <C-w><C-m> :MyToggleWindowSize<CR>
 if has('win32') || has('win64')
   nnoremap <C-\> :QuickRun<CR>
 else
+  " GUI版では[-]キーになる
   nnoremap <C-_> :QuickRun<CR>
 endif
 let g:quickrun_config = get(g:, 'quickrun_config', {})
