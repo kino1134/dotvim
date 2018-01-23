@@ -288,7 +288,11 @@ noremap <C-w>m :MyToggleWindowSize<CR>
 noremap <C-w><C-m> :MyToggleWindowSize<CR>
 
 " QuickRunの各種設定
-nnoremap <C-_> :QuickRun<CR>
+if has('win32') || has('win64')
+  nnoremap <C-\> :QuickRun<CR>
+else
+  nnoremap <C-_> :QuickRun<CR>
+endif
 let g:quickrun_config = get(g:, 'quickrun_config', {})
 let g:quickrun_config._ = {
   \ 'runner' : 'vimproc',
