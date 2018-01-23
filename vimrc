@@ -213,7 +213,14 @@ if has('gui_macvim')
   let g:airline_right_alt_sep = '⮃'
   let g:airline_symbols.branch = '⭠'
   let g:airline_symbols.readonly = '⭤'
-  let g:airline_symbols.linenr = '⭡'
+  " GUI版で全角文字を使うと、guifontwideの設定が効かなくなる
+  if has('gui_running')
+    let g:airline_symbols.linenr = "\u3013"
+    let g:airline_symbols.maxlinenr = '⭡'
+  else
+    let g:airline_symbols.linenr = '☰'
+    let g:airline_symbols.maxlinenr = '㏑' " '⭡'
+  endif
 endif
 
 " 余計な情報を読まないようにする
