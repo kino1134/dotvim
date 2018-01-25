@@ -9,32 +9,25 @@ if has('win32') || has('win64')
 endif
 
 """ MacVimのデフォルト設定を明記する
-" 検索時に大文字小文字を無視 (noignorecase:無視しない)
-set ignorecase
-" 大文字小文字の両方が含まれている場合は大文字小文字を区別
-set smartcase
-" バックスペースでインデントや改行を削除できるようにする
-set backspace=indent,eol,start
-" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
-set wildmenu
-" テキスト挿入中の自動折り返しを日本語に対応させる
-set formatoptions+=mM
-" コマンドをステータス行に表示
-set showcmd
-" タイトルを表示
-set title
-" do incremental searching
-set incsearch
-" do incremental searching
-if has('mouse')
+set ignorecase                  " 検索時に大文字小文字を無視 (noignorecase:無視しない)
+set smartcase                   " 大文字小文字の両方が含まれている場合は大文字小文字を区別
+set wildmenu                    " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
+set formatoptions+=mM           " テキスト挿入中の自動折り返しを日本語に対応させる
+set showcmd                     " コマンドをステータス行に表示
+set title                       " タイトルを表示
+set incsearch                   " do incremental searching
+set backspace=indent,eol,start  " バックスペースでインデントや改行を削除できるようにする
+if has('mouse')                 " マウスクリックを有効にする
   set mouse=a
 endif
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
+
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
   filetype plugin indent on
@@ -54,27 +47,21 @@ else
   set autoindent
 endif
 
+
+
 " 全画面表示
 set lines=1000
 set columns=999
-
-" 行番号表示
-set number
-
-" 現在行をハイライト
-set cursorline
-
-" 不可視文字を表示　
+" 不可視文字を表示
 set list
 set listchars=tab:>_,eol:↲,extends:»,precedes:«
 
-" 一時ファイルのディレクトリをまとめる
-let s:baseDir = expand('<sfile>:p:h')
-execute 'set directory=' . s:baseDir . '/swap'
-execute 'set backupdir=' . s:baseDir . '/backup'
-execute 'set undodir=' . s:baseDir . '/undo'
+set number              " 行番号表示
+set cursorline          " 現在行をハイライト
+set virtualedit+=block  " 矩形選択時、行末以降にも移動できるようにする
+set clipboard+=unname   " クリップボードへのコピーを行えるようにする
 
-" インデントの各種デフォルト設定
+""" インデントの各種デフォルト設定
 set autoindent       " 改行前に前行のインデントを計測
 set smartindent      " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 "set cindent          " Cプログラムファイルの自動インデントを始める
@@ -84,14 +71,18 @@ set tabstop=2        " タブを含むファイルを開いた際、何文字の
 set shiftwidth=2     " 自動インデントで入る空白数
 set softtabstop=2    " キーボードからはいるタブ数
 
-" 矩形選択時、行末以降にも移動できるようにする
-set virtualedit+=block
+" 一時ファイルのディレクトリをまとめる
+let s:baseDir = expand('<sfile>:p:h')
+execute 'set directory=' . s:baseDir . '/swap'
+execute 'set backupdir=' . s:baseDir . '/backup'
+execute 'set undodir=' . s:baseDir . '/undo'
 
-" クリップボードへのコピーを行えるようにする
-set clipboard+=unnamed
+
 
 " ハイライトを消すキーバインドを追加する
 nmap <Esc><Esc> :nohl<CR>
+" ノーマルモード時、空行を挿入するだけのキーを追加
+nnoremap <C-j> o<ESC>
 
 " インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
@@ -105,8 +96,7 @@ inoremap <C-d> <Del>
 inoremap <C-z> <C-o>u
 inoremap <C-y> <C-o><C-r>
 
-" ノーマルモード時、空行を挿入するだけのキーを追加
-nnoremap <C-j> o<ESC>
+
 
 "dein Scripts-----------------------------
 if &compatible
@@ -306,8 +296,6 @@ let g:quickrun_config._ = {
   \ 'runner/vimproc/updatetime': 60,
   \ }
 " let g:quickrun_config._ = {
-"       \ 'runner'    : 'system',
-"       \ 'runner/vimproc/updatetime' : 60,
 "       \ 'outputter' : 'error',
 "       \ 'outputter/error/success' : 'buffer',
 "       \ 'outputter/error/error'   : 'quickfix',
