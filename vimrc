@@ -1,6 +1,9 @@
+" Windows向けに文字コード設定を追加
 set encoding=utf-8
 scriptencoding utf-8
 
+" Windows向けにvimprocのDLLダウンロード指定を追加
+" ただし、効いているかどうか不明
 if has('win32') || has('win64')
   let g:vimproc#download_windows_dll = 1
 endif
@@ -81,14 +84,14 @@ set tabstop=2        " タブを含むファイルを開いた際、何文字の
 set shiftwidth=2     " 自動インデントで入る空白数
 set softtabstop=2    " キーボードからはいるタブ数
 
-" ハイライトを消すキーバインドを追加する
-nmap <Esc><Esc> :nohl<CR>
-
 " 矩形選択時、行末以降にも移動できるようにする
 set virtualedit+=block
 
 " クリップボードへのコピーを行えるようにする
 set clipboard+=unnamed
+
+" ハイライトを消すキーバインドを追加する
+nmap <Esc><Esc> :nohl<CR>
 
 " インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
@@ -97,7 +100,10 @@ inoremap <C-l> <Up>
 inoremap <C-k> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
+" インサートモード時のDelete、Undo、Redoを追加
 inoremap <C-d> <Del>
+inoremap <C-z> <C-o>u
+inoremap <C-y> <C-o><C-r>
 
 " ノーマルモード時、空行を挿入するだけのキーを追加
 nnoremap <C-j> o<ESC>
