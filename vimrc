@@ -59,7 +59,7 @@ set listchars=tab:>_,eol:↲,extends:»,precedes:«
 set number              " 行番号表示
 set cursorline          " 現在行をハイライト
 set virtualedit+=block  " 矩形選択時、行末以降にも移動できるようにする
-set clipboard+=unname   " クリップボードへのコピーを行えるようにする
+set clipboard+=unnamed  " クリップボードへのコピーを行えるようにする
 
 """ インデントの各種デフォルト設定
 set autoindent       " 改行前に前行のインデントを計測
@@ -259,14 +259,20 @@ if has('gui_macvim') || has('win32') || has('win64')
   augroup load_session
     autocmd!
     autocmd VimEnter * nested if s:initRestoreSession() && filereadable(s:sessionFilePath) | execute 'source ' . s:sessionFilePath | endif
-    autocmd VimEnter * NERDTree
+    autocmd VimEnter * NERDTree | execute "normal! \<C-w>w"
   augroup END
 endif
 
-" 行末の空白文字の自動削除
+" 行末の空白文字の自動削除(Markdown以外)
+function! s:removeTrailingWhitespace()
+  if &ft =~ 'markdown'
+    return
+  endif
+  :%s/\s\+$//ge
+endfunction
 augroup remove_trailing_whitespace
   autocmd!
-  autocmd BufWritePre * :%s/\s\+$//ge
+  autocmd BufWritePre * :call s:removeTrailingWhitespace()
 augroup END
 
 " 一時的なウィンドウ最大/最小化を行う
