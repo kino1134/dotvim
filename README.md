@@ -19,6 +19,15 @@
       キー：Consolas  
       値：meiryoKe_602r1.ttc,MeiryoKe_Console
 
+## 挿入モードを抜ける時にIMEを解除する
+### Macの場合
+Karabiner-Elementsで用意してくれている設定を使わせてもらう。  
+http://yudoufu.hatenablog.jp/entry/2018/01/14/215152
+### Windowsの場合
+？？？
+### Linuxの場合
+???
+
 ## TODO
 * Windowsでvimprocをインストールする際、dllを手作業でコピーしている。  
   `g:vimproc#download_windows_dll` を設定しているが、上手く利いていない模様。
