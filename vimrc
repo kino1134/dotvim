@@ -139,6 +139,7 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('cohama/lexima.vim')                         " Auto Close Pair
   call dein#add('scrooloose/syntastic')                      " Syntax Check
   call dein#add('mbbill/undotree')                           " Undo Tree
+  call dein#add('machakann/vim-Verdin')                      " omni completion function for Vim script
   """ 追加ここまで
 
   " Required:
@@ -309,7 +310,7 @@ let g:quickrun_config._ = {
 "       \ 'outputter/buffer/close_on_empty' : 1,
 "       \ }
 
-" easymotion
+" Easymotion
 let g:EasyMotion_smartcase = 1
 map f <Plug>(easymotion-fl)
 map t <Plug>(easymotion-tl)
