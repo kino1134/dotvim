@@ -100,7 +100,7 @@ inoremap <C-y> <C-o><C-r>
 
 
 
-"dein Scripts-----------------------------
+"dein Scripts-----------------------------{{{
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -159,7 +159,7 @@ syntax enable
 "if dein#check_install()
 "  call dein#install()
 "endif
-"End dein Scripts-------------------------
+"End dein Scripts-------------------------}}}
 
 " カラーテーマ
 " colorscheme onedark
