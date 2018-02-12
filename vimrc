@@ -142,6 +142,8 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('scrooloose/syntastic')                      " Syntax Check
   call dein#add('mbbill/undotree')                           " Undo Tree
   call dein#add('machakann/vim-Verdin')                      " omni completion function for Vim script
+  call dein#add('kana/vim-textobj-user')                     " Create your own text objects
+  call dein#add('kana/vim-textobj-indent')                   " Text objects for indented blocks of lines
   """ 追加ここまで
 
   " Required:
