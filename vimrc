@@ -83,6 +83,8 @@ execute 'set undodir=' . s:baseDir . '/undo'
 nmap <Esc><Esc> :nohl<CR>
 " ノーマルモード時、空行を挿入するだけのキーを追加
 nnoremap <C-j> o<ESC>
+" カーソル行以外を折りたたむキーバインドを追加
+nmap z<Space> zMzv
 
 " インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
@@ -320,3 +322,25 @@ map <Space> <Plug>(easymotion-s2)
 nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
 nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
 
+" 折りたたみ状況を表示する
+set foldcolumn=1
+" 折りたたみ時の表示内容を変更する
+set foldtext=MyFoldtext()
+function MyFoldtext()
+  let temp_start_str = getline(v:foldstart)
+  let indent_count = strdisplaywidth(matchstr(temp_start_str, '\v^\s+'))
+  let start_str = substitute(temp_start_str, '\v^\s+', repeat(' ', indent_count), '')
+  let end_str   = substitute(getline(v:foldend), '\v^\s+', '', '')[0 : 9] " 行末は10文字で切り捨てる
+  let fold_str  = start_str . " … " . end_str
+
+  let line_count = 1 + v:foldend - v:foldstart
+  let end_line = line('$')
+  let status_str = printf('【Lv.%2d, %d行, %.1f%%】', v:foldlevel, line_count, (line_count*1.0)/end_line*100)
+
+  let w = winwidth(0) - &foldcolumn - (&number ? &numberwidth : 0) " ウィンドウの幅を取得する
+  let f_s = strdisplaywidth(fold_str)
+  let s_s = strdisplaywidth(status_str)
+  let space = w - f_s - (s_s > 30 ? s_s : 30)
+
+  return fold_str . repeat('-', space) . status_str
+endfunction
