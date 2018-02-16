@@ -49,6 +49,9 @@ endif
 
 
 
+" matchitプラグインを有効化する
+source $VIMRUNTIME/macros/matchit.vim
+
 " 全画面表示
 set lines=1000
 set columns=999
@@ -294,6 +297,10 @@ command! MyToggleWindowSize :call s:myToggleWindowMaximize()
 noremap <C-w>m :MyToggleWindowSize<CR>
 noremap <C-w><C-m> :MyToggleWindowSize<CR>
 
+" lexima
+" Endwise RuleをCtrl-jでも使えるようにする
+imap <C-j> <CR>
+
 " QuickRunの各種設定
 if has('win32') || has('win64')
   nnoremap <C-\> :QuickRun<CR>
@@ -328,7 +335,7 @@ nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
 set foldcolumn=1
 " 折りたたみ時の表示内容を変更する
 set foldtext=MyFoldtext()
-function MyFoldtext()
+function! MyFoldtext()
   let temp_start_str = getline(v:foldstart)
   let indent_count = strdisplaywidth(matchstr(temp_start_str, '\v^\s+'))
   let start_str = substitute(temp_start_str, '\v^\s+', repeat(' ', indent_count), '')
