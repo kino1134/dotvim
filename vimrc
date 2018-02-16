@@ -49,6 +49,9 @@ endif
 
 
 
+" matchitプラグインを有効化する
+source $VIMRUNTIME/macros/matchit.vim
+
 " 全画面表示
 set lines=1000
 set columns=999
@@ -83,6 +86,8 @@ execute 'set undodir=' . s:baseDir . '/undo'
 nmap <Esc><Esc> :nohl<CR>
 " ノーマルモード時、空行を挿入するだけのキーを追加
 nnoremap <C-j> o<ESC>
+" カーソル行以外を折りたたむキーバインドを追加
+nmap z<Space> zMzv
 
 " インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
@@ -98,7 +103,7 @@ inoremap <C-y> <C-o><C-r>
 
 
 
-"dein Scripts-----------------------------
+"dein Scripts-----------------------------{{{
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -131,7 +136,7 @@ if dein#load_state(s:baseDir . '/bundles')
   " call dein#add('itchyny/lightline.vim')                     " Statusbar
   call dein#add('scrooloose/nerdtree')                       " File Explorer
   call dein#add('tpope/vim-fugitive')                        " Git Plugin
-  call dein#add('thinca/vim-quickrun')                       " Run Command Interface
+  call dein#add('kino1134/vim-quickrun')                     " Run Command Interface
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
   call dein#add('easymotion/vim-easymotion')                 " Search easily
   call dein#add('tpope/vim-commentary')                      " Toggle Comment
@@ -139,6 +144,9 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('cohama/lexima.vim')                         " Auto Close Pair
   call dein#add('scrooloose/syntastic')                      " Syntax Check
   call dein#add('mbbill/undotree')                           " Undo Tree
+  call dein#add('machakann/vim-Verdin')                      " omni completion function for Vim script
+  call dein#add('kana/vim-textobj-user')                     " Create your own text objects
+  call dein#add('kana/vim-textobj-indent')                   " Text objects for indented blocks of lines
   """ 追加ここまで
 
   " Required:
@@ -154,7 +162,7 @@ syntax enable
 "if dein#check_install()
 "  call dein#install()
 "endif
-"End dein Scripts-------------------------
+"End dein Scripts-------------------------}}}
 
 " カラーテーマ
 " colorscheme onedark
@@ -289,6 +297,10 @@ command! MyToggleWindowSize :call s:myToggleWindowMaximize()
 noremap <C-w>m :MyToggleWindowSize<CR>
 noremap <C-w><C-m> :MyToggleWindowSize<CR>
 
+" lexima
+" Endwise RuleをCtrl-jでも使えるようにする
+imap <C-j> <CR>
+
 " QuickRunの各種設定
 if has('win32') || has('win64')
   nnoremap <C-\> :QuickRun<CR>
@@ -309,7 +321,7 @@ let g:quickrun_config._ = {
 "       \ 'outputter/buffer/close_on_empty' : 1,
 "       \ }
 
-" easymotion
+" Easymotion
 let g:EasyMotion_smartcase = 1
 map f <Plug>(easymotion-fl)
 map t <Plug>(easymotion-tl)
@@ -319,3 +331,25 @@ map <Space> <Plug>(easymotion-s2)
 nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
 nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
 
+" 折りたたみ状況を表示する
+set foldcolumn=1
+" 折りたたみ時の表示内容を変更する
+set foldtext=MyFoldtext()
+function! MyFoldtext()
+  let temp_start_str = getline(v:foldstart)
+  let indent_count = strdisplaywidth(matchstr(temp_start_str, '\v^\s+'))
+  let start_str = substitute(temp_start_str, '\v^\s+', repeat(' ', indent_count), '')
+  let end_str   = substitute(getline(v:foldend), '\v^\s+', '', '')[0 : 9] " 行末は10文字で切り捨てる
+  let fold_str  = start_str . " … " . end_str
+
+  let line_count = 1 + v:foldend - v:foldstart
+  let end_line = line('$')
+  let status_str = printf('【Lv.%2d, %d行, %.1f%%】', v:foldlevel, line_count, (line_count*1.0)/end_line*100)
+
+  let w = winwidth(0) - &foldcolumn - (&number ? &numberwidth : 0) " ウィンドウの幅を取得する
+  let f_s = strdisplaywidth(fold_str)
+  let s_s = strdisplaywidth(status_str)
+  let space = w - f_s - (s_s > 30 ? s_s : 30)
+
+  return fold_str . repeat('-', space) . status_str
+endfunction
