@@ -136,7 +136,7 @@ if dein#load_state(s:baseDir . '/bundles')
   " call dein#add('itchyny/lightline.vim')                     " Statusbar
   call dein#add('scrooloose/nerdtree')                       " File Explorer
   call dein#add('tpope/vim-fugitive')                        " Git Plugin
-  call dein#add('thinca/vim-quickrun')                       " Run Command Interface
+  call dein#add('kino1134/vim-quickrun')                     " Run Command Interface
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
   call dein#add('easymotion/vim-easymotion')                 " Search easily
   call dein#add('tpope/vim-commentary')                      " Toggle Comment
