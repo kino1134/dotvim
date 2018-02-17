@@ -147,6 +147,7 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('machakann/vim-Verdin')                      " omni completion function for Vim script
   call dein#add('kana/vim-textobj-user')                     " Create your own text objects
   call dein#add('kana/vim-textobj-indent')                   " Text objects for indented blocks of lines
+  call dein#add('nelstrom/vim-textobj-rubyblock')            " A custom text object for selecting ruby blocks
   """ 追加ここまで
 
   " Required:
@@ -330,6 +331,15 @@ map T <Plug>(easymotion-Tl)
 map <Space> <Plug>(easymotion-s2)
 nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
 nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " 折りたたみ状況を表示する
 set foldcolumn=1
