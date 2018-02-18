@@ -4,7 +4,7 @@
 
 
 
-""" カラーテーマ
+""" colorscheme {{{
 colorscheme Tomorrow-Night-Eighties
 " colorscheme onedark
 " colorscheme molokai
@@ -14,8 +14,9 @@ colorscheme Tomorrow-Night-Eighties
 " highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 " highlight CursorLine gui=underline guifg=NONE guibg=NONE
+" }}}
 
-""" lightline
+""" lightline {{{
 " let g:lightline = {
 "       \ 'colorscheme': 'Tomorrow_Night_Eighties',
 "       \ 'component': {
@@ -38,8 +39,9 @@ colorscheme Tomorrow-Night-Eighties
 "   endif
 "   return ''
 " endfunction
+" }}}
 
-""" airline
+""" airline {{{
 let g:airline_theme='onedark'
 " powerlineを使う上で、以下のようなフォント合成が必要になる
 " 最新のものだと、ambiwidth=doubleで余白が空いてしまう
@@ -66,8 +68,9 @@ if has('gui_macvim')
     let g:airline_symbols.maxlinenr = '㏑' " '⭡'
   endif
 endif
+" }}}
 
-""" QuickRunの各種設定
+""" quirckrun {{{
 let g:quickrun_config = get(g:, 'quickrun_config', {})
 let g:quickrun_config._ = {
   \ 'runner' : 'vimproc',
@@ -80,11 +83,13 @@ let g:quickrun_config._ = {
 "       \ 'outputter/buffer/split'  : ':rightbelow 8sp',
 "       \ 'outputter/buffer/close_on_empty' : 1,
 "       \ }
+" }}}
 
-""" Easymotion
+""" Easymotion {{{
 let g:EasyMotion_smartcase = 1
+" }}}
 
-""" syntastic
+""" syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -92,3 +97,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" }}}
+
+" vim: foldmethod=marker

@@ -7,7 +7,8 @@
 
 """ Vimの起動・終了時に状態を読込・保存する
 let g:sessionFileDir  = MyVimrcDir() . '/sessions/'
-let s:sessionFileName = substitute(pathshorten($VIMRUNTIME), '[/:\]', '_', 'g') . '.vim'
+let s:gui = has('gui_running') ? '_g' : ''
+let s:sessionFileName = substitute(pathshorten($VIMRUNTIME), '[/:\\]', '_', 'g') . s:gui . '.vim'
 let s:sessionFilePath = g:sessionFileDir . s:sessionFileName
 if has('gui_macvim') || has('win32') || has('win64')
   " セッションの保存

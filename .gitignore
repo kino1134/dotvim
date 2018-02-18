@@ -3,6 +3,7 @@ vimsession.vim
 *~
 backup/*
 bundles/*
+sessions/*
 swap/*
 undo/*
 !.gitkeep

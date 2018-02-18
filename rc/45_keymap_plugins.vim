@@ -3,11 +3,11 @@
 """"
 
 
-" lexima
+""" lexima
 " Endwise RuleをCtrl-jでも使えるようにする
 imap <C-j> <CR>
 
-" QuickRun
+""" QuickRun
 if has('win32') || has('win64')
   nnoremap <C-\> :QuickRun<CR>
 else
@@ -15,11 +15,21 @@ else
   nnoremap <C-_> :QuickRun<CR>
 endif
 
-" Easymotion
+""" Easymotion
+" 行内検索を置き換える
 map f <Plug>(easymotion-fl)
 map t <Plug>(easymotion-tl)
 map F <Plug>(easymotion-Fl)
 map T <Plug>(easymotion-Tl)
-map <Space> <Plug>(easymotion-s2)
+" 表示中文言から検索
+map <Space><Space> <Plug>(easymotion-s2)
+" ウィンドウを越えた検索を実施
 nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
 nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
+
+" NERDTree
+nnoremap <silent> <Space>nn :<C-u>NERDTreeToggle<CR>
+nnoremap <silent> <Space>nf :<C-u>NERDTreeFind<CR>
+
+" fugitive
+nnoremap <silent> <Space>gs :<C-u>Gstatus><CR>
