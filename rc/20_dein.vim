@@ -4,30 +4,24 @@
 
 
 
-if &compatible
-  set nocompatible               " Be iMproved
+""" インストールディレクトリの取得
+let s:baseDir = MyVimrcDir() . '/bundles'
+let s:deinDir = s:baseDir . '/repos/github.com/Shougo/dein.vim'
+
+""" dein.vimの自動インストール
+if !isdirectory(s:deinDir)
+  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:deinDir))
 endif
 
-" Required:
-let s:baseDir = MyVimrcDir()
-execute 'set runtimepath+=' . s:baseDir . '/bundles/repos/github.com/Shougo/dein.vim'
+""" 読込パスの追加
+execute 'set runtimepath+=' . s:deinDir
 
-" Required:
-if dein#load_state(s:baseDir . '/bundles')
-  call dein#begin(s:baseDir . '/bundles')
+""" プラグインの追加
+if dein#load_state(s:baseDir)
+  call dein#begin(s:baseDir)
 
-  " Let dein manage dein
-  " Required:
-  call dein#add(s:baseDir . '/bundles/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/dein.vim')
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-
-  " You can specify revision/branch/tag.
-  " call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
-
-  """ 追加
   call dein#add('joshdick/onedark.vim')                      " Colorscheme
   call dein#add('tomasr/molokai')                            " Colorscheme
   call dein#add('jacoborus/tender.vim')                      " Colorscheme
@@ -49,18 +43,17 @@ if dein#load_state(s:baseDir . '/bundles')
   call dein#add('kana/vim-textobj-user')                     " Create your own text objects
   call dein#add('kana/vim-textobj-indent')                   " Text objects for indented blocks of lines
   call dein#add('nelstrom/vim-textobj-rubyblock')            " A custom text object for selecting ruby blocks
-  """ 追加ここまで
 
-  " Required:
+  """ 追加終了
   call dein#end()
   call dein#save_state()
 endif
 
-" Required:
+""" Required:
 filetype plugin indent on
 syntax enable
 
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
+""" プラグインの自動インストール
+if dein#check_install()
+  call dein#install()
+endif

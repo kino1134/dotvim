@@ -10,10 +10,8 @@ function! MyVimrcDir()
 endfunction
 
 " 余計な情報を読まないようにする
-if has('gui_macvim') || has('win32') || has('win64')
-  let g:macvim_skip_colorscheme=1
-  let g:no_gvimrc_example=1
-endif
+let g:macvim_skip_colorscheme=1
+let g:no_gvimrc_example=1
 
 " matchitプラグインを有効化する
 source $VIMRUNTIME/macros/matchit.vim
@@ -53,7 +51,7 @@ execute 'set undodir=' . s:baseDir . '/undo'
 
 
 
-" 行末の空白文字の自動削除(Markdown以外)
+""" 行末の空白文字の自動削除(Markdown以外)
 function! s:removeTrailingWhitespace()
   if &ft =~ 'markdown'
     return
@@ -65,7 +63,7 @@ augroup remove_trailing_whitespace
   autocmd BufWritePre * :call s:removeTrailingWhitespace()
 augroup END
 
-" 折りたたみ時のテキスト内容を組み立てる
+""" 折りたたみ時のテキスト内容を組み立てる
 function! MyFoldtext()
   let temp_start_str = getline(v:foldstart)
   let indent_count = strdisplaywidth(matchstr(temp_start_str, '\v^\s+'))
