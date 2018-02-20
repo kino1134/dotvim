@@ -17,8 +17,8 @@ let g:no_gvimrc_example=1
 source $VIMRUNTIME/macros/matchit.vim
 
 " 全画面表示
-set lines=1000
-set columns=999
+" set lines=1000
+" set columns=999
 
 " 不可視文字を表示
 set list
@@ -47,7 +47,12 @@ set foldtext=MyFoldtext() " 折りたたみ時の表示内容を変更する
 let s:baseDir = MyVimrcDir()
 execute 'set directory=' . s:baseDir . '/swap'
 execute 'set backupdir=' . s:baseDir . '/backup'
-execute 'set undodir=' . s:baseDir . '/undo'
+
+""" Undoを永続化する
+if has('persistent_undo')
+  execute 'set undodir=' . s:baseDir . '/undo'
+  set undofile
+endif
 
 
 
