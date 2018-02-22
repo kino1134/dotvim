@@ -101,4 +101,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " }}}
 
+""" gitgutter {{{
+set updatetime=100
+" }}}
 " vim: foldmethod=marker
