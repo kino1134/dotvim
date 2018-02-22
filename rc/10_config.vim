@@ -22,7 +22,7 @@ let g:no_gvimrc_example=1
 source $VIMRUNTIME/macros/matchit.vim
 
 " 全画面表示
-if MyIsCygwin()
+if !MyIsCygwin()
   set lines=1000
   set columns=999
 endif
