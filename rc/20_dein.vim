@@ -3,6 +3,11 @@
 """""
 
 
+" 互換性チェック {{{
+}
+if &compatible
+  set nocompatible
+endif
 
 """ インストールディレクトリの取得
 let s:baseDir = MyVimrcDir() . '/bundles'
@@ -15,6 +20,7 @@ endif
 
 """ 読込パスの追加
 execute 'set runtimepath+=' . s:deinDir
+" }}}
 
 """ プラグインの追加
 if dein#load_state(s:baseDir)
@@ -32,7 +38,9 @@ if dein#load_state(s:baseDir)
   call dein#add('scrooloose/nerdtree')                       " File Explorer
   call dein#add('tpope/vim-fugitive')                        " Git Plugin
   call dein#add('kino1134/vim-quickrun')                     " Run Command Interface
-  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
+  if !MyIsCygwin()
+    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
+  endif
   call dein#add('easymotion/vim-easymotion')                 " Search easily
   call dein#add('tpope/vim-commentary')                      " Toggle Comment
   call dein#add('tpope/vim-surround')                        " Text Object for Pairs
@@ -43,13 +51,15 @@ if dein#load_state(s:baseDir)
   call dein#add('kana/vim-textobj-user')                     " Create your own text objects
   call dein#add('kana/vim-textobj-indent')                   " Text objects for indented blocks of lines
   call dein#add('nelstrom/vim-textobj-rubyblock')            " A custom text object for selecting ruby blocks
+  " call dein#add('vim-jp/vimdoc-ja')                          " 日本語ヘルプを追加
+  call dein#add('airblade/vim-gitgutter')                    " shows a git diff in the gutter
 
   """ 追加終了
   call dein#end()
   call dein#save_state()
 endif
 
-""" Required:
+""" Required: {{{
 filetype plugin indent on
 syntax enable
 
@@ -57,3 +67,6 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+" }}}
+
+" vim: foldmethod=marker
