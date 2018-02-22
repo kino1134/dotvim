@@ -12,8 +12,8 @@ nmap z<Space> zMzv
 nnoremap <C-j> o<ESC>
 
 """ 一時的なウィンドウ最大/最小化を行う
-noremap <C-w>m :MyToggleWindowSize<CR>
-noremap <C-w><C-m> :MyToggleWindowSize<CR>
+nnoremap <C-w>m :MyToggleWindowSize<CR>
+nnoremap <C-w><C-m> :MyToggleWindowSize<CR>
 
 """ インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
@@ -35,6 +35,11 @@ cnoremap <C-d> <Del>
 cnoremap <C-k> <Down>
 cnoremap <C-l> <Up>
 execute 'set cedit=\<C-z>'
+
+""" 挿入・コマンドラインでクリップボードからのコピーを簡単に行う
+noremap <C-v> <C-r>*
+
+
 
 """ sをカスタムキーマップとして利用する
 " 元のsを空けるためにssで代用する
