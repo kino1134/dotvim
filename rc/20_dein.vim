@@ -4,7 +4,6 @@
 
 
 " 互換性チェック {{{
-}
 if &compatible
   set nocompatible
 endif
