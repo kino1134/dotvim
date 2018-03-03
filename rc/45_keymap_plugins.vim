@@ -27,9 +27,14 @@ map <Space><Space> <Plug>(easymotion-s2)
 nmap <C-w><Space> <Plug>(easymotion-overwin-f2)
 nmap <C-w><C-@> <Plug>(easymotion-overwin-f2)
 
-" NERDTree
+""" NERDTree
 nnoremap <silent> <Space>nn :<C-u>NERDTreeToggle<CR>
 nnoremap <silent> <Space>nf :<C-u>NERDTreeFind<CR>
 
-" fugitive
-nnoremap <silent> <Space>gs :<C-u>Gstatus><CR>
+" メモ：<C-W><C-Z>でプレビュー画面は閉じられる
+
+""" fugitive
+nmap <silent> <Space>gs :<C-u>Gstatus<CR>
+
+""" gitgutter
+nmap <silent> <Space>gd <Plug>GitGutterPreviewHunk
