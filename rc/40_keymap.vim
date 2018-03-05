@@ -37,7 +37,17 @@ cnoremap <C-l> <Up>
 execute 'set cedit=\<C-z>'
 
 """ 挿入・コマンドラインでクリップボードからのコピーを簡単に行う
-noremap <C-v> <C-r>*
+map! <C-v> <C-r>*
+
+
+
+""" Grep時、検索結果ウィンドウを自動で開く
+" 合わせて、新規ウィンドウで該当ファイルを開くキーマップを復活させる
+augroup QuickFixCmd
+  autocmd!
+  autocmd QuickFixCmdPost *grep* cwindow
+  autocmd QuickFixCmdPost *grep* nnoremap <buffer> <C-w><C-m> <C-w><C-m>
+augroup END
 
 
 
