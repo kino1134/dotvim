@@ -52,6 +52,8 @@ if dein#load_state(s:baseDir)
   call dein#add('nelstrom/vim-textobj-rubyblock')            " A custom text object for selecting ruby blocks
   " call dein#add('vim-jp/vimdoc-ja')                          " 日本語ヘルプを追加
   call dein#add('airblade/vim-gitgutter')                    " shows a git diff in the gutter
+  call dein#add('pangloss/vim-javascript')                   " Javascript improved syntax highlighting andindentation.
+  call dein#add('junegunn/vim-easy-align')                   " align
 
   """ 追加終了
   call dein#end()
