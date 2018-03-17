@@ -104,4 +104,12 @@ let g:syntastic_check_on_wq = 0
 """ gitgutter {{{
 set updatetime=100
 " }}}
+
+""" vim-vue {{{
+augroup vimVue
+  autocmd!
+  autocmd FileType vue syntax sync fromstart
+augroup END
+" }}}
+
 " vim: foldmethod=marker
