@@ -76,6 +76,7 @@ if !MyIsCygwin()
   let g:quickrun_config._ = {
         \ 'runner': 'vimproc',
         \ 'runner/vimproc/updatetime': 60,
+        \ 'outputter/buffer/into': 1,
         \ }
 endif
 " let g:quickrun_config._ = {
@@ -109,7 +110,17 @@ set updatetime=100
 augroup vimVue
   autocmd!
   autocmd FileType vue syntax sync fromstart
+  autocmd FileType vue nmap <silent> <buffer> <Space>vv :<C-u>set ft=vue<CR>
+  autocmd FileType vue nmap <silent> <buffer> <Space>vs :<C-u>set ft=javascript<CR>
+  autocmd FileType vue nmap <silent> <buffer> <Space>vt :<C-u>set ft=typescript<CR>
+  autocmd FileType vue nmap <silent> <buffer> <Space>vc :<C-u>set ft=scss<CR>
 augroup END
+" }}}
+
+""" context_filetype.vim {{{
+if dein#tap('context_filetype.vim')
+  call context_filetype#version()
+endif
 " }}}
 
 " vim: foldmethod=marker
