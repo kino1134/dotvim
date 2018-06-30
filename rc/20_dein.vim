@@ -36,16 +36,16 @@ if dein#load_state(s:baseDir)
   " call dein#add('itchyny/lightline.vim')                     " Statusbar
 
   """ Global
-  call dein#add('easymotion/vim-easymotion')                 " Search easily
-  call dein#add('tpope/vim-commentary')                      " Toggle Comment
-  call dein#add('cohama/lexima.vim')                         " Auto Close Pair
-  call dein#add('junegunn/vim-easy-align')                   " align
-  call dein#add('mbbill/undotree')                           " Undo Tree
-  " call dein#add('vim-jp/vimdoc-ja')                          " 日本語ヘルプを追加
-  call dein#add('kino1134/vim-quickrun')                     " Run Command Interface
   if !MyIsCygwin()
     call dein#add('Shougo/vimproc.vim', {'build' : 'make'})    " 非同期実行インターフェース
   endif
+  call dein#add('Shougo/context_filetype.vim')               " Switch Context filetype
+  call dein#add('easymotion/vim-easymotion')                 " Search easily
+  call dein#add('junegunn/vim-easy-align')                   " align
+  call dein#add('mbbill/undotree')                           " Undo Tree
+  " call dein#add('vim-jp/vimdoc-ja')                          " 日本語ヘルプを追加
+  " call dein#add('kino1134/vim-quickrun')                     " Run Command Interface
+  call dein#add('thinca/vim-quickrun')                     " Run Command Interface
 
   """ Interface
   call dein#add('scrooloose/nerdtree')                       " File Explorer
@@ -60,10 +60,19 @@ if dein#load_state(s:baseDir)
 
   """ Program Language
   call dein#add('scrooloose/syntastic')                      " Syntax Check
+  call dein#add('tyru/caw.vim', { 'depends': ['context_filetype.vim'] })                              " vim comment plugin
+  call dein#add('tpope/vim-commentary')                      " Toggle Comment
+  call dein#add('cohama/lexima.vim')                         " Auto Close Pair
   call dein#add('machakann/vim-Verdin')                      " omni completion function for Vim script
   call dein#add('pangloss/vim-javascript')                   " Javascript improved syntax highlighting andindentation.
   call dein#add('posva/vim-vue')                             " Syntax Highlight for Vue.js
   call dein#add('mattn/emmet-vim')                           " emmet
+
+
+
+  call dein#disable('caw.vim')
+
+
 
   """ 追加終了
   call dein#end()
