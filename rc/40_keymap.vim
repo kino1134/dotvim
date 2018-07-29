@@ -15,6 +15,10 @@ nnoremap <C-j> o<ESC>
 nnoremap <C-w>m :MyToggleWindowSize<CR>
 nnoremap <C-w><C-m> :MyToggleWindowSize<CR>
 
+""" 文字単位の削除でレジスタに入れない
+nnoremap x "_x
+nnoremap X "_X
+
 """ インサートモード時のカーソル移動を追加
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
