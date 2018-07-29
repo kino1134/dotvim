@@ -67,6 +67,7 @@ if dein#load_state(s:baseDir)
   call dein#add('pangloss/vim-javascript')                   " Javascript improved syntax highlighting andindentation.
   call dein#add('posva/vim-vue')                             " Syntax Highlight for Vue.js
   call dein#add('mattn/emmet-vim')                           " emmet
+  call dein#add('fatih/vim-go')                              " Go Lang
 
 
 
