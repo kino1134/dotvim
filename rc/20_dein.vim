@@ -25,7 +25,11 @@ execute 'set runtimepath+=' . s:deinDir
 if dein#load_state(s:baseDir)
   call dein#begin(s:baseDir)
 
-  call dein#add('Shougo/dein.vim')
+  if v:version < 800
+    call dein#add('Shougo/dein.vim', { rev: '1.5' })
+  else
+    call dein#add('Shougo/dein.vim')
+  endif
 
   """ Visual
   call dein#add('joshdick/onedark.vim')                      " Colorscheme

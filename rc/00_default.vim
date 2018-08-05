@@ -24,7 +24,7 @@ set showcmd                     " コマンドをステータス行に表示
 set title                       " タイトルを表示
 set incsearch                   " do incremental searching
 set backspace=indent,eol,start  " バックスペースでインデントや改行を削除できるようにする
-if has('mouse')                 " マウスクリックを有効にする
+if has('mouse') && has('clipboard') " マウスクリックを有効にする
   set mouse=a
 endif
 
