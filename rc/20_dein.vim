@@ -26,7 +26,7 @@ if dein#load_state(s:baseDir)
   call dein#begin(s:baseDir)
 
   if v:version < 800
-    call dein#add('Shougo/dein.vim', { rev: '1.5' })
+    call dein#add('Shougo/dein.vim', { 'rev': '1.5' })
   else
     call dein#add('Shougo/dein.vim')
   endif
