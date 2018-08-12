@@ -123,4 +123,8 @@ if dein#tap('context_filetype.vim')
 endif
 " }}}
 
+""" vim-go {{{
+let g:go_version_warning = 0
+" }}}
+
 " vim: foldmethod=marker
