@@ -130,4 +130,9 @@ endif
 let g:go_version_warning = 0
 " }}}
 
+""" previm {{{
+" only Mac
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+" }}}
+
 " vim: foldmethod=marker
