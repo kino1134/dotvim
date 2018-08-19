@@ -55,6 +55,7 @@ if dein#load_state(s:baseDir)
   call dein#add('scrooloose/nerdtree')                       " File Explorer
   call dein#add('tpope/vim-fugitive')                        " Git Plugin
   call dein#add('airblade/vim-gitgutter')                    " shows a git diff in the gutter
+  call dein#add('previm/previm')                             " preview Markdown
 
   """ Text Object
   call dein#add('tpope/vim-surround')                        " Text Object for Pairs
@@ -64,7 +65,7 @@ if dein#load_state(s:baseDir)
 
   """ Program Language
   call dein#add('scrooloose/syntastic')                      " Syntax Check
-  call dein#add('tyru/caw.vim', { 'depends': ['context_filetype.vim'] })                              " vim comment plugin
+  " call dein#add('tyru/caw.vim', { 'depends': ['context_filetype.vim'] }) " vim comment plugin
   call dein#add('tpope/vim-commentary')                      " Toggle Comment
   call dein#add('cohama/lexima.vim')                         " Auto Close Pair
   call dein#add('machakann/vim-Verdin')                      " omni completion function for Vim script
@@ -72,7 +73,7 @@ if dein#load_state(s:baseDir)
   call dein#add('posva/vim-vue')                             " Syntax Highlight for Vue.js
   call dein#add('mattn/emmet-vim')                           " emmet
   call dein#add('fatih/vim-go')                              " Go Lang
-
+  call dein#add('tpope/vim-markdown')                        " Markdown
 
 
   call dein#disable('caw.vim')
