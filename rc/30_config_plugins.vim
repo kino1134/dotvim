@@ -100,6 +100,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" yarn global add eslint-cli
+let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_debug = 3
 " }}}
 
 """ gitgutter {{{
@@ -121,6 +124,10 @@ augroup END
 if dein#tap('context_filetype.vim')
   call context_filetype#version()
 endif
+" }}}
+
+""" vim-go {{{
+let g:go_version_warning = 0
 " }}}
 
 " vim: foldmethod=marker
