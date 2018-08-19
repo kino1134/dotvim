@@ -2,8 +2,8 @@
 " 各種プラグインのインストールを行う
 """""
 
-
-" 互換性チェック {{{
+""" セットアップ {{{
+" 互換性チェック
 if &compatible
   set nocompatible
 endif
@@ -76,8 +76,7 @@ if dein#load_state(s:baseDir)
   call dein#add('tpope/vim-markdown')                        " Markdown
 
 
-  call dein#disable('caw.vim')
-
+  " call dein#disable('caw.vim')
 
 
   """ 追加終了
