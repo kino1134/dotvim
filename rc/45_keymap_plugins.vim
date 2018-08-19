@@ -7,14 +7,6 @@
 " Endwise RuleをCtrl-jでも使えるようにする
 imap <C-j> <CR>
 
-""" QuickRun
-if has('win32') || has('win64')
-  nnoremap <C-\> :QuickRun<CR>
-else
-  " GUI版では[-]キーになる
-  nnoremap <C-_> :QuickRun<CR>
-endif
-
 """ Easymotion
 " 行内検索を置き換える
 map f <Plug>(easymotion-fl)
