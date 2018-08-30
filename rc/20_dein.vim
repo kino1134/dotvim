@@ -74,7 +74,7 @@ if dein#load_state(s:baseDir)
   call dein#add('mattn/emmet-vim')                           " emmet
   call dein#add('fatih/vim-go')                              " Go Lang
   call dein#add('tpope/vim-markdown')                        " Markdown
-
+  call dein#add('MaxMEllon/vim-jsx-pretty')                  " syntax highlight JSX
 
   " call dein#disable('caw.vim')
 
