@@ -135,4 +135,8 @@ let g:go_version_warning = 0
 let g:previm_open_cmd = 'open -a Google\ Chrome'
 " }}}
 
+""" vim-rooter {{{
+let g:rooter_patterns = ['package.json', '.git', 'git/']
+" }}}
+
 " vim: foldmethod=marker

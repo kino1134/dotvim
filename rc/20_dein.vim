@@ -50,6 +50,7 @@ if dein#load_state(s:baseDir)
   " call dein#add('vim-jp/vimdoc-ja')                          " 日本語ヘルプを追加
   " call dein#add('kino1134/vim-quickrun')                     " Run Command Interface
   call dein#add('thinca/vim-quickrun')                     " Run Command Interface
+  call dein#add('airblade/vim-rooter')                     " Changes Vim working directory to project root
 
   """ Interface
   call dein#add('scrooloose/nerdtree')                       " File Explorer
